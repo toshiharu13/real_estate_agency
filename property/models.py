@@ -75,3 +75,18 @@ class Claim(models.Model):
         null=True, blank=True,
         verbose_name='Квартира, на которую пожаловались')
     claim_text = models.TextField('Текст жалобы')
+
+
+class Owner(models.Model):
+    owner_full_name = models.CharField('ФИО владельца', max_length=100)
+    owners_phonenumber = models.CharField('Номер владельца', max_length=30)
+    owner_pure_phone = PhoneNumberField(
+        'Нормализованный номер владельца',
+        blank=True)
+    ownners_flats = models.ManyToManyField(
+        Flat,
+        related_name='flats_owners',
+        verbose_name='квартиры в собственности')
+
+    def __str__(self):
+        return self.owner_full_name
