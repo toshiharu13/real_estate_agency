@@ -6,7 +6,7 @@ import phonenumbers
 
 def feelup_purephone_fields(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for flat in Flat.objects.filter(owners_phonenumber='+70000000000'):
+    for flat in Flat.objects.all():
         parsing_phone_num = phonenumbers.parse(flat.owners_phonenumber, 'RU')
         if phonenumbers.is_valid_number(parsing_phone_num):
             flat.owner_pure_phone = parsing_phone_num
